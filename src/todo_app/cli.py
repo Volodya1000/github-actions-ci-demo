@@ -21,7 +21,7 @@ def list_tasks(
     """List all tasks."""
     tasks = todo.list_tasks(include_completed=include_completed)
     if not tasks:
-        typer.echo("No tasks found.")
+        typer.echo("No tasks found")
         return
 
     typer.echo("Tasks:")
@@ -35,7 +35,7 @@ def complete(task_id: int = typer.Argument(..., help="ID of the task to complete
     """Mark a task as completed."""
     task = todo.complete_task(task_id)
     if task:
-        typer.echo(f"Completed: {task.title} (ID: {task.id})")
+        typer.echo(f"Completed: {task.title} (ID:  {task.id})")
     else:
         typer.echo(f"Error: Task with ID {task_id} not found.", err=True)
         raise typer.Exit(code=1)
