@@ -31,7 +31,7 @@ def list_tasks(
 
 
 @app.command("complete")
-def complete(task_id: int = typer.Argument(..., help="ID of the task to complete")):
+def complete(task_id:   int = typer.Argument(..., help="ID of  the task to complete")):
     """Mark a task as completed."""
     task = todo.complete_task(task_id)
     if task:
