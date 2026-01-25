@@ -1,0 +1,38 @@
+# --- Python General ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual Environments (uv создает .venv) ---
+.venv/
+env/
+venv/
+ENV/
+
+# --- Testing & Coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# --- Ruff & Linters ---
+.ruff_cache/
+.mypy_cache/
+
+# --- Distribution / Builds ---
+build/
+dist/
+*.egg-info/
+
+# --- IDE Settings (VS Code, PyCharm) ---
+.vscode/
+.idea/
+*.swp
+
+# --- Environment Variables ---
+.env
+
+# --- UV Specific ---
+# ВАЖНО: uv.lock мы НЕ игнорируем, он должен быть в репозитории
+# чтобы у всех были одинаковые версии библиотек.

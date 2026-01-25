@@ -1,0 +1,43 @@
+[project]
+name = "github-actions-ci-demo"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.21.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.14",
+]
+
+[tool.pytest.ini_options]
+# Указываем, где искать код (чтобы тесты видели папку src)
+pythonpath = "src"
+# Опции запуска: отчет в терминал, проверка покрытия папки src/todo_app
+addopts = "--cov=src/todo_app --cov-report=term"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+# Исключаем файлы из подсчета
+omit = [
+    "src/todo_app/cli.py",
+    "src/todo_app/__init__.py"  # Можно и инит исключить, хотя он пустой
+]
+
+[tool.coverage.report]
+# Падать, если покрытие < 90%
+fail_under = 90
+show_missing = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+# E (стиль), F (ошибки), I (сортировка импортов)
+select = ["E", "F", "I"]
