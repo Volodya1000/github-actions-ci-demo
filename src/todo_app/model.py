@@ -33,3 +33,9 @@ class TodoList:
         if include_completed:
             return self._tasks
         return [t for t in self._tasks if not t.completed]
+
+    def delete_task(self, task_id: int) -> Optional[Task]:
+        for i, task in enumerate(self._tasks):
+            if task.id == task_id:
+                return self._tasks.pop(i)
+        return None
