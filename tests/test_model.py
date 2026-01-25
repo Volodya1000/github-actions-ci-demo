@@ -54,9 +54,9 @@ def test_delete_task():
 def test_delete_task_removes_correct_task():
     """Удаляет именно ту задачу, которую нужно."""
     todo = TodoList()
-    _ = todo.add_task("Task 1")
-    t2 = todo.add_task("Task 2")
-    _ = todo.add_task("Task 3")
+    _ = todo.add_task("Task  1")
+    t2 = todo.add_task("Task  2")
+    _ = todo.add_task("Task  3")
 
     todo.delete_task(t2.id)
     tasks = todo.list_tasks(include_completed=True)
