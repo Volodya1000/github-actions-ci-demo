@@ -15,7 +15,8 @@ def add(title: str = typer.Argument(..., help="Title of the new task")):
 
 @app.command("list")
 def list_tasks(
-    include_completed: bool = typer.Option(False, "--all", "-a", help="Show all tasks including completed"
+    include_completed: bool = typer.Option(
+        False, "--all", "-a", help="Show all tasks including completed"
     ),
 ):
     """List all tasks."""
@@ -31,7 +32,7 @@ def list_tasks(
 
 
 @app.command("complete")
-def complete(task_id:   int = typer.Argument(..., help="ID of  the task to complete")):
+def complete(task_id: int = typer.Argument(..., help="ID of  the task to complete")):
     """Mark a task as completed."""
     task = todo.complete_task(task_id)
     if task:
