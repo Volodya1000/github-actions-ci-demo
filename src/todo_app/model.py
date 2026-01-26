@@ -39,4 +39,3 @@ class TodoList:
             if task.id == task_id:
                 return self._tasks.pop(i)
         return None
-
