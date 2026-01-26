@@ -6,42 +6,45 @@ on:
   pull_request:
     branches: [ master ]
 
+# Если ты запушил новый коммит, пока старый еще проверяется — отменяем старый.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   quality-check:
-    name: Lint & Test
+    name: Lint, Format, Type Check & Tests
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Забираем код из репозитория
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем и настраиваем uv (с кэшированием)
+      # Устанавливаем uv (очень быстро)
       - name: Install uv
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      # 3. Устанавливаем Python 3.12
       - name: Set up Python
         run: uv python install 3.12
 
-      # 4. Устанавливаем зависимости (и prod, и dev из группы dev)
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-      # 5. Проверяем статический анализ (Linter)
-      # Если тут ошибка — пайплайн остановится
+      # 1. Сначала быстрые проверки. Если упадет Ruff, нет смысла гонять тесты.
       - name: Run Linter (Ruff)
-        run: uv run ruff check .
+        run: uv run ruff check . --output-format=github
 
-      # 6. Проверяем форматирование
-      # --check не меняет файлы, а падает, если они не отформатированы
       - name: Check Formatting (Ruff)
         run: uv run ruff format --check .
 
-      # 7. Запускаем тесты с проверкой покрытия
-      # Настройки (fail_under=90) берутся из pyproject.toml
+      # 2. Проверка типов
+      - name: Type Check (ty)
+        # --output-format=github позволяет видеть ошибки прямо в файлах в PR
+        run: uv run ty check src --error-on-warning --output-format=github
+
+      # 3. Тесты запускаем последними, так как они самые долгие
       - name: Run Tests & Coverage
         run: uv run pytest
