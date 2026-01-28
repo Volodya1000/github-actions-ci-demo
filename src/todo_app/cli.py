@@ -16,7 +16,10 @@ def add(title: str = typer.Argument(..., help="Title of the new task")):
 @app.command("list")
 def list_tasks(
     include_completed: bool = typer.Option(
-        False, "--all", "-a", help="Show all tasks including completed",
+        False,
+        "--all",
+        "-a",
+        help="Show all tasks including completed",
     ),
 ):
     """List all tasks."""
