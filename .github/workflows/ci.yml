@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   quality-check:
-    name: Lint, Format, Type Check & Tests
+    name: Lint & Test
     runs-on: ubuntu-latest
 
     steps:
