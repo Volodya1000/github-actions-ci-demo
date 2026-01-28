@@ -13,6 +13,7 @@ dev = [
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
     "ruff>=0.14.14",
+    "ty>=0.0.13",
 ]
 
 [tool.pytest.ini_options]
@@ -41,3 +42,16 @@ target-version = "py312"
 [tool.ruff.lint]
 # E (стиль), F (ошибки), I (сортировка импортов)
 select = ["E", "F", "I"]
+
+
+
+
+
+[tool.ty]
+
+[tool.ty.src]
+exclude = [
+    "src/todo_app/cli.py",
+    "**/__init__.py",
+     "tests/**",
+]
