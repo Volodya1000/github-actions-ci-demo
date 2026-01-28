@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import List, Optional
 
 
 @dataclass
@@ -11,7 +10,7 @@ class Task:
 
 class TodoList:
     def __init__(self):
-        self._tasks: List[Task] = []
+        self._tasks: list[Task] = []
         self._next_id = 1
 
     def add_task(self, title: str) -> Task:
@@ -22,19 +21,19 @@ class TodoList:
         self._next_id += 1
         return task
 
-    def complete_task(self, task_id: int) -> Optional[Task]:
+    def complete_task(self, task_id: int) -> Task | None:
         for task in self._tasks:
             if task.id == task_id:
                 task.completed = True
                 return task
         return None
 
-    def list_tasks(self, include_completed: bool = False) -> List[Task]:
+    def list_tasks(self, include_completed: bool = False) -> list[Task]:
         if include_completed:
             return self._tasks
         return [t for t in self._tasks if not t.completed]
 
-    def delete_task(self, task_id: int) -> Optional[Task]:
+    def delete_task(self, task_id: int) -> Task | None:
         for i, task in enumerate(self._tasks):
             if task.id == task_id:
                 return self._tasks.pop(i)

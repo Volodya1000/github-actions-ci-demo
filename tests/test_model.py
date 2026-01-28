@@ -1,6 +1,6 @@
 import pytest
 
-from todo_app.model import TodoList
+from src.todo_app.model import TodoList
 
 
 def test_add_task():
